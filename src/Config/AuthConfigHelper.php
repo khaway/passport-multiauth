@@ -17,7 +17,7 @@ class AuthConfigHelper
     public static function getUserProvider(Authenticatable $user)
     {
         foreach (config('auth.providers') as $provider => $config) {
-            if ($user instanceof $config['model']) {
+            if (get_class($user) === $config['model']) {
                 return $provider;
             }
         }

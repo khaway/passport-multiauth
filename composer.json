@@ -1,5 +1,5 @@
 {
-    "name": "smartins/passport-multiauth",
+    "name": "khaway/passport-multiauth",
     "description": "Add support to multi-auth on Laravel Passport",
     "type": "library",
     "license": "MIT",
