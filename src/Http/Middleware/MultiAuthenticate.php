@@ -110,16 +110,16 @@ class MultiAuthenticate extends Authenticate
             // After it, we'll change the passport driver behavior to get the
             // authenticated user. It'll change on methods like Auth::user(),
             // Auth::guard('company')->user(), Auth::check().
-            // AuthFacade::extend(
-            //     'passport',
-            //     function ($app, $name, array $config) use ($request) {
-            //         $providerGuard = AuthConfigHelper::getProviderGuard($config['provider']);
+            AuthFacade::extend(
+                'passport',
+                function ($app, $name, array $config) use ($request) {
+                    $providerGuard = AuthConfigHelper::getProviderGuard($config['provider']);
 
-            //         return tap($this->makeGuard($request, $providerGuard), function ($guard) {
-            //             Application::getInstance()->refresh('request', $guard, 'setRequest');
-            //         });
-            //     }
-            // );
+                    return tap($this->makeGuard($request, $providerGuard), function ($guard) {
+                        Application::getInstance()->refresh('request', $guard, 'setRequest');
+                    });
+                }
+            );
             AuthFacade::clearGuardsCache();
         } catch (OAuthServerException $e) {
             // If has an OAuthServerException check if has unit tests and fake
